@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ModelsAI\product_month_fastTreeTweedie.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="product-data.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Code</SubType>

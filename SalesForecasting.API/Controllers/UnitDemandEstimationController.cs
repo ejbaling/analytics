@@ -30,6 +30,7 @@ namespace SalesForecasting.API.Controllers
         {
             // next,productId,year,month,units,avg,count,max,min,prev
             var nextMonthUnitDemandEstimation = await this.productSales.Predict($"ModelsAI/product_month_fastTreeTweedie.zip", productId, year, month, units, avg, count, max, min, prev);
+
             return Ok(nextMonthUnitDemandEstimation.Score);
         }
     }
