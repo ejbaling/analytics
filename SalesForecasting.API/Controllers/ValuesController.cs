@@ -99,7 +99,7 @@ namespace SalesForecasting.API.Controllers
 
             var prediction = model.Predict(new ProductData()
             {
-                ProductId = productId,
+                ProductId = "productId",
                 Year = year,
                 Month = month,
                 Max = max,

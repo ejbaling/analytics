@@ -36,17 +36,22 @@ namespace SalesForecasting.Training
         /// <returns></returns>
         private static PredictionModel<ProductData, ProductUnitPrediction> CreateProductModelUsingPipeline(string dataPath)
         {
+            if (!File.Exists(dataPath))
+                Console.WriteLine("File does not exist.");
+
             Console.WriteLine("*************************************************");
             Console.WriteLine("Training product forecasting model using Pipeline");
 
             var learningPipeline = new LearningPipeline();
 
             // First stage in the pipeline will be reading the source csv file
-            learningPipeline.Add(new TextLoader(dataPath).CreateFrom<ProductData>(useHeader: false, separator: ','));
+            learningPipeline.Add(new TextLoader(dataPath).CreateFrom<ProductData>(useHeader: true, separator: ','));
 
             // The model needs the columns to be arranged into a single column of numeric type
             // First, we group all numeric columns into a single array named NumericalFeatures
-            learningPipeline.Add(new ColumnConcatenator("NumericalFeatures", nameof(ProductData.Year),
+            learningPipeline.Add(new ColumnConcatenator(
+                "NumericalFeatures", 
+                nameof(ProductData.Year),
                 nameof(ProductData.Month),
                 nameof(ProductData.Max),
                 nameof(ProductData.Min),
@@ -93,7 +98,7 @@ namespace SalesForecasting.Training
             // Build sample data
             ProductData dataSample = new ProductData()
             {
-                ProductId = 1,
+                ProductId = "1",
                 Month = 9,
                 Year = 2017,
                 Avg = 6,
@@ -106,11 +111,11 @@ namespace SalesForecasting.Training
 
             // Predict sample data
             ProductUnitPrediction prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Real value (units): 551, Forecasting (units): {prediction.Score}");
+            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Real value (units): 48, Forecasting (units): {prediction.Score}");
 
             dataSample = new ProductData()
             {
-                ProductId = 1,
+                ProductId = "1",
                 Month = 10,
                 Year = 2017,
                 Avg = 10,
@@ -126,7 +131,7 @@ namespace SalesForecasting.Training
 
             dataSample = new ProductData()
             {
-                ProductId = 2,
+                ProductId = "2",
                 Month = 9,
                 Year = 2017,
                 Avg = 20,
@@ -138,11 +143,11 @@ namespace SalesForecasting.Training
             };
 
             prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Real Value (units): 1076, Forecasting (units): {prediction.Score}");
+            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Real Value (units): 130, Forecasting (units): {prediction.Score}");
 
             dataSample = new ProductData()
             {
-                ProductId = 2,
+                ProductId = "2",
                 Month = 10,
                 Year = 2017,
                 Avg = 12,

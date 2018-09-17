@@ -7,35 +7,37 @@ namespace SalesForecasting.Training.Models
     /// </summary>
     public class ProductData
     {
-        [Column(ordinal: "0")]
-        public float ProductId;
+        [Column(ordinal: "0", name: "Label")]
+        public float Next;
 
         [Column(ordinal: "1")]
-        public float Year;
+        public string ProductId;
 
         [Column(ordinal: "2")]
-        public float Month;
+        public float Year;
 
         [Column(ordinal: "3")]
-        public float Count;
+        public float Month;
 
         [Column(ordinal: "4")]
-        public float Min;
-
-        [Column(ordinal: "5")]
-        public float Max;
-
-        [Column(ordinal: "6")]
         public float Units;
 
-        [Column(ordinal: "7")]
+        [Column(ordinal: "5")]
         public float Avg;
 
+        [Column(ordinal: "6")]
+        public float Count;
+
+        [Column(ordinal: "7")]
+        public float Max;
+
         [Column(ordinal: "8")]
+        public float Min;
+
+        [Column(ordinal: "9")]
         public float Prev;
 
-        [Column(ordinal: "9", name: "Label")]
-        public float Next;
+        
     }
 
     public class ProductUnitPrediction
