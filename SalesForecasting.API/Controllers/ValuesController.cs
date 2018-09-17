@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Analytics.Model.SalesForecasting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
 using Microsoft.ML.Transforms;
-using SalesForecasting.Training.Models;
 using System.Collections.Generic;
 
 namespace SalesForecasting.API.Controllers

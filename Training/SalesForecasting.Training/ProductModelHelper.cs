@@ -1,8 +1,8 @@
-﻿using Microsoft.ML;
+﻿using Analytics.Model.SalesForecasting;
+using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
 using Microsoft.ML.Transforms;
-using SalesForecasting.Training.Models;
 using System;
 using System.IO;
 using System.Threading.Tasks;

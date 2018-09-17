@@ -1,6 +1,6 @@
 ﻿using Microsoft.ML.Runtime.Api;
 
-namespace SalesForecasting.Training.Models
+namespace Analytics.Model.SalesForecasting
 {
     /// <summary>
     /// Sample for sales quantity prediction by product model
