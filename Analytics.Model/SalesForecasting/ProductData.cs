@@ -7,6 +7,25 @@ namespace Analytics.Model.SalesForecasting
     /// </summary>
     public class ProductData
     {
+        public ProductData()
+        {
+            
+        }
+
+        public ProductData(string productId, int year, int month, float units, float avg,
+            int count, float max, float min, float prev)
+        {
+            this.ProductId = productId;
+            this.Year = year;
+            this.Month = month;
+            this.Units = units;
+            this.Avg = avg;
+            this.Count = count;
+            this.Max = max;
+            this.Min = min;
+            this.Prev = prev;
+        }
+
         [Column(ordinal: "0", name: "Label")]
         public float Next;
 
