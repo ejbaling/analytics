@@ -9,4 +9,10 @@
     <PackageReference Include="Microsoft.ML" Version="0.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

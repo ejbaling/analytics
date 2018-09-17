@@ -1,9 +1,9 @@
 ﻿using Microsoft.ML.Runtime.Api;
 
-namespace Microsoft.eShopOnContainers.Services.AI.SalesForecasting.Training.MLNet.API
+namespace SalesForecasting.Training.Models
 {
     /// <summary>
-    /// Sample for sales prediction by product model
+    /// Sample for sales quantity prediction by product model
     /// </summary>
     public class ProductData
     {
@@ -17,21 +17,24 @@ namespace Microsoft.eShopOnContainers.Services.AI.SalesForecasting.Training.MLNe
         public float Month;
 
         [Column(ordinal: "3")]
-        public float SalesCount;
+        public float Count;
 
         [Column(ordinal: "4")]
-        public float MinQuantity;
+        public float Min;
 
         [Column(ordinal: "5")]
-        public float MaxQuantity;
+        public float Max;
 
         [Column(ordinal: "6")]
-        public float Quantity;
+        public float Units;
 
         [Column(ordinal: "7")]
+        public float Avg;
+
+        [Column(ordinal: "8")]
         public float Prev;
 
-        [Column(ordinal: "8", name: "Label")]
+        [Column(ordinal: "9", name: "Label")]
         public float Next;
     }
 

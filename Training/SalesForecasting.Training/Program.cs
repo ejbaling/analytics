@@ -6,7 +6,15 @@ namespace SalesForecasting.Training
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                //await ProductModelHelper.SaveModel("data/products.stats.csv");
+                //await ProductModelHelper.TestPrediction();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
         }
     }
 }
