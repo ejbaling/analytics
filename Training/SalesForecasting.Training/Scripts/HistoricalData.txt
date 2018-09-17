@@ -1,6 +1,8 @@
-﻿select *, 
-lag(Units,1,0) over (order by ProductId, [Year], [Month]) as [Prev],
-lead(Units,1,0) over (order by ProductId, [Year], [Month]) as [Next]
+﻿select 
+case when lead(ProductId,1,0) over (order by ProductId, [Year], [Month]) = ProductId then lead(Units,1,0) over (order by ProductId, [Year], [Month]) else 0 end as [Next],
+ProductId, [Year], [Month], Units, [Avg], [Count], [Max], [Min],
+case when lag(ProductId,1,0) over (order by ProductId, [Year], [Month]) = ProductId then lag(Units,1,0) over (order by ProductId, [Year], [Month]) else 0 end as [Prev]
+
 from (
 
 select ProductId, [Year], [Month],  Max(OrderQuantity) as [Max],
