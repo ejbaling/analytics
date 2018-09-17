@@ -1,0 +1,22 @@
+﻿select *, 
+lag(Units,1,0) over (order by ProductId, [Year], [Month]) as [Prev],
+lead(Units,1,0) over (order by ProductId, [Year], [Month]) as [Next]
+from (
+
+select ProductId, [Year], [Month],  Max(OrderQuantity) as [Max],
+Min(OrderQuantity) as [Min], Count(SalesOrderId) as [Count], Sum(OrderQuantity) as Units, Round(Avg(OrderQuantity), 0) as [Avg] from (
+
+select ProductId, DatePart(year, CompletedDate) as [Year], DatePart(month, CompletedDate) as [Month], SalesOrderId, OrderQuantity
+from SalesOrderLines sol inner join SalesOrders so on sol.SalesOrderId = so.Id
+where so.OrderStatus = N'Completed'
+) x group by ProductId, [Year], [Month]
+
+) y order by ProductId, [Year], [Month]
+
+
+--select SalesOrderId, sum(OrderQuantity) from (
+
+--select ProductId, DatePart(year, CompletedDate) as [Year], DatePart(month, CompletedDate) as [Month], SalesOrderId, OrderQuantity
+--from SalesOrderLines sol inner join SalesOrders so on sol.SalesOrderId = so.Id
+--where so.OrderStatus = N'Completed'
+--) x where [Year] = 2017 and [Month] = 9 and x.ProductId = 1 group by x.SalesOrderId
