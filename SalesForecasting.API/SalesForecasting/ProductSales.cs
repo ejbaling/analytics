@@ -1,7 +1,4 @@
 ﻿using Microsoft.ML;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Analytics.Model.SalesForecasting
@@ -11,7 +8,7 @@ namespace Analytics.Model.SalesForecasting
         /// <summary>
         /// This method demonstrates how to run prediction on one example at a time.
         /// </summary>
-        public async Task<ProductUnitPrediction> Predict(string modelPath, string productId, float year, float month, float units, float avg, int count, float max, float min, float prev)
+        public async Task<ProductUnitPrediction> Predict(string modelPath, string productId, float year, float month, float units, float avg, float count, float max, float min, float prev)
         {
             // Load model
             var predictionEngine = await CreatePredictionEngineAsync(modelPath);

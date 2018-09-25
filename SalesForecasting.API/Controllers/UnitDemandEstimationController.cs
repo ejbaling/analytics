@@ -1,6 +1,6 @@
 ﻿using Analytics.Model.SalesForecasting;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace SalesForecasting.API.Controllers
 {
@@ -17,21 +17,21 @@ namespace SalesForecasting.API.Controllers
 
         // GET api/unitdemandestimation
         [HttpGet]
-        public async System.Threading.Tasks.Task<IActionResult> GetAsync(
+        public async System.Threading.Tasks.Task<JsonResult> GetAsync(
             [FromQuery]string productId,
-            [FromQuery]int year, 
+            [FromQuery]int year,
             [FromQuery]int month,
-            [FromQuery]float units, 
+            [FromQuery]float units,
             [FromQuery]float avg,
-            [FromQuery]int count, 
+            [FromQuery]int count,
             [FromQuery]float max,
-            [FromQuery]float min, 
+            [FromQuery]float min,
             [FromQuery]float prev)
         {
             // next,productId,year,month,units,avg,count,max,min,prev
             var nextMonthUnitDemandEstimation = await this.productSales.Predict($"ModelsAI/product_month_fastTreeTweedie.zip", productId, year, month, units, avg, count, max, min, prev);
 
-            return Ok(nextMonthUnitDemandEstimation.Score);
+            return new JsonResult(nextMonthUnitDemandEstimation.Score);
         }
     }
 }

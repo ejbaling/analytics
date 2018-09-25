@@ -201,15 +201,15 @@ namespace SalesForecasting.Training
 
             dataSample = new ProductData()
             {
-                ProductId = "576",
-                Month = 5,
+                ProductId = "2492",
+                Month = 8,
                 Year = 2018,
-                Avg = 4,
-                Max = 4,
-                Min = 4,
-                Count = 1,
-                Prev = 1,
-                Units = 4
+                Avg = 4.6F,
+                Max = 24,
+                Min = 1,
+                Count = 121,
+                Prev = 286,
+                Units = 554
             };
 
             prediction = model.Predict(dataSample);
@@ -217,15 +217,15 @@ namespace SalesForecasting.Training
 
             dataSample = new ProductData()
             {
-                ProductId = "576",
-                Month = 6,
+                ProductId = "2746",
+                Month = 9,
                 Year = 2018,
-                Avg = 1,
-                Max = 1,
+                Avg = 4.2F,
+                Max = 12,
                 Min = 1,
-                Count = 1,
-                Prev = 4,
-                Units = 1
+                Count = 88,
+                Prev = 554,
+                Units = 369
             };
 
             prediction = model.Predict(dataSample);

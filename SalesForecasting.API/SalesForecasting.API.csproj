@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Training\SalesForecasting.Training\SalesForecasting.Training.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="ModelsAI\product_month_fastTreeTweedie.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

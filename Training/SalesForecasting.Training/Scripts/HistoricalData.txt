@@ -6,7 +6,7 @@ case when lag(ProductId,1,0) over (order by ProductId, [Year], [Month]) = Produc
 from (
 
 select ProductId, [Year], [Month],  Max(OrderQuantity) as [Max],
-Min(OrderQuantity) as [Min], Count(SalesOrderId) as [Count], Sum(OrderQuantity) as Units, Round(Avg(OrderQuantity), 0) as [Avg] from (
+Min(OrderQuantity) as [Min], Count(SalesOrderId) as [Count], Sum(OrderQuantity) as Units, Avg(OrderQuantity) as [Avg] from (
 
 select ProductId, DatePart(year, CompletedDate) as [Year], DatePart(month, CompletedDate) as [Month], SalesOrderId, OrderQuantity
 from SalesOrderLines sol inner join SalesOrders so on sol.SalesOrderId = so.Id
