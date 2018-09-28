@@ -62,14 +62,14 @@ namespace SalesForecasting.Training
             ));
 
             // Second group is for categorical features (just one in this case), we name this column CategoryFeatures
-            learningPipeline.Add(new ColumnConcatenator("CategoryFeatures", nameof(ProductData.ProductId)));
+            learningPipeline.Add(new ColumnConcatenator(outputColumn: "CategoryFeatures", nameof(ProductData.ProductId)));
 
             // Then we need to transform the category column using one-hot encoding. This will return a numeric array
             learningPipeline.Add(new CategoricalOneHotVectorizer("CategoryFeatures"));
 
             // Once all columns are numeric types, all columns will be combined
             // into a single column, named Features 
-            learningPipeline.Add(new ColumnConcatenator("Features", "NumericalFeatures", "CategoryFeatures"));
+            learningPipeline.Add(new ColumnConcatenator(outputColumn: "Features", "NumericalFeatures", "CategoryFeatures"));
 
             // Add the Learner to the pipeline. The Learner is the machine learning algorithm used to train a model
             // In this case, TweedieFastTree.TrainRegression was one of the best performing algorithms, but you can 
@@ -98,138 +98,36 @@ namespace SalesForecasting.Training
             // Build sample data
             ProductData dataSample = new ProductData()
             {
-                ProductId = "1",
-                Month = 9,
-                Year = 2017,
-                Avg = 6,
-                Max = 15,
+                ProductId = "428",
+                Year = 2018,
+                Month = 8,
+                Units = 404,
+                Avg = 5.179487f,
+                Count = 78,
+                Max = 60,
                 Min = 1,
-                Count = 14,
-                Prev = 0,
-                Units = 88
+                Prev = 335
             };
 
             // Predict sample data
             ProductUnitPrediction prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Real value (units): 48, Forecasting (units): {prediction.Score}");
+            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Real value: {dataSample.Units}, Forecasting: {prediction.Score}");
 
             dataSample = new ProductData()
             {
-                ProductId = "1",
-                Month = 10,
-                Year = 2017,
-                Avg = 10,
-                Max = 20,
-                Min = 1,
-                Count = 5,
-                Prev = 88,
-                Units = 48
-            };
-
-            prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Forecasting (units): {prediction.Score}");
-
-            
-
-            dataSample = new ProductData()
-            {
-                ProductId = "1",
+                ProductId = "428",
                 Year = 2018,
-                Month = 7,
-                Units = 47,
-                Avg = 12,
-                Count = 4,
-                Max = 30,
-                Min = 3,
-                Prev = 13
-            };
-
-
-            prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Real Value (units): 34, Forecasting (units): {prediction.Score}");
-
-
-            dataSample = new ProductData()
-            {
-                ProductId = "1",
-                Year = 2018,
-                Month = 8,
-                Units = 34,
-                Avg = 11,
-                Count = 3,
-                Max = 27,
-                Min = 1,
-                Prev = 47
-            };
-
-            prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Forecasting (units): {prediction.Score}");
-
-            
-
-            dataSample = new ProductData()
-            {
-                ProductId = "2",
                 Month = 9,
-                Year = 2017,
-                Avg = 20,
-                Max = 100,
+                Units = 302,
+                Avg = 5.206896f,
+                Count = 58,
+                Max = 40,
                 Min = 1,
-                Count = 26,
-                Prev = 34,
-                Units = 521
+                Prev = 404
             };
 
             prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Real Value (units): 130, Forecasting (units): {prediction.Score}");
-
-            dataSample = new ProductData()
-            {
-                ProductId = "2",
-                Month = 10,
-                Year = 2017,
-                Avg = 12,
-                Max = 45,
-                Min = 2,
-                Count = 11,
-                Prev = 521,
-                Units = 130
-            };
-
-            prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Forecasting (units): {prediction.Score}");
-
-            dataSample = new ProductData()
-            {
-                ProductId = "2492",
-                Month = 8,
-                Year = 2018,
-                Avg = 4.6F,
-                Max = 24,
-                Min = 1,
-                Count = 121,
-                Prev = 286,
-                Units = 554
-            };
-
-            prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Real Value (units): 1, Forecasting (units): {prediction.Score}");
-
-            dataSample = new ProductData()
-            {
-                ProductId = "2746",
-                Month = 9,
-                Year = 2018,
-                Avg = 4.2F,
-                Max = 12,
-                Min = 1,
-                Count = 88,
-                Prev = 554,
-                Units = 369
-            };
-
-            prediction = model.Predict(dataSample);
-            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Forecasting (units): {prediction.Score}");
+            Console.WriteLine($"Product: {dataSample.ProductId}, month: {dataSample.Month + 1}, year: {dataSample.Year} - Forecasting: {prediction.Score}");
         }
     }
 }
